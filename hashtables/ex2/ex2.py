@@ -12,21 +12,18 @@ cache = {}
 
 
 def reconstruct_trip(tickets, length):
-    route = [None] * length  # allocate memory
-    for ticket in tickets:
-        cache[ticket] = (ticket.source, ticket.destination)
-        print("Ticket:", ticket)
-    curr_ticket = cache["NONE"]
-    print("CURR:", curr_ticket)
-    for i in range(length):
-        if i > 0:
-            source = route[i-1]
-        else:
-            # source = "NONE"
-            source = "NONE"
-        cache[source] = route[i]
 
-    return route[:-1]
+    for ticket in tickets:
+        cache[ticket.source] = ticket.destination  # set source/destination
+
+    curr_ticket = "NONE"  # starting ticket
+    route = [cache[curr_ticket]]  # make a list so we can append
+    curr_ticket = cache[curr_ticket]
+    while curr_ticket != "NONE":  # while we have not reached the last ticket
+        route.append(cache[curr_ticket])  # add current ticket
+        curr_ticket = cache[curr_ticket]
+
+    return route
 
 
 tickets = [
