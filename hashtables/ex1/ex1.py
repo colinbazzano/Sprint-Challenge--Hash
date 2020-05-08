@@ -8,14 +8,11 @@ def get_indices_of_item_weights(weights, length, limit):
     cache = {}
     duplicates = False
     duplicates_dict = {}
-    # for index, weight in enumerate(weights):
-    #     cache[index] = weight
-    for i in range(0, length):  # for the length of item weights
+
+    for i in range(length):  # for the length of item weights
         value = weights[i]  # gets the values of the weights
-        # print("value:", value)
         cache[value] = i
         key_to_find = limit - value
-        # print("key to find", key_to_find)
         if key_to_find in cache:
             if value > key_to_find:
                 return (i, cache[key_to_find])
@@ -28,15 +25,8 @@ def get_indices_of_item_weights(weights, length, limit):
                 elif duplicates is True:
                     return (i, duplicates_dict[value])
 
-        # if cache[key_to_find] is None:
-        #     return
-        #     print([cache[key_to_find], i])
-        # return [cache[(cache, key_to_find), i]]
-
     return None
 
-
-print(get_indices_of_item_weights(weights_list, 5, 21))
 
 """Criteria
 
